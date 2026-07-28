@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 
 const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
@@ -23,6 +24,11 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
       work.map((entry) => (
         <li class="split">
           <div>
+            {entry.data.image && entry.data.imageAlt && (
+              <a class="thumb" href={`/work/${entry.id}/`} tabindex="-1" aria-hidden="true">
+                <Image src={entry.data.image} alt="" widths={[420, 840]} sizes="(min-width: 60rem) 40rem, 92vw" />
+              </a>
+            )}
             <h2>
               <a href={`/work/${entry.id}/`}>{entry.data.title}</a>
             </h2>
@@ -72,6 +78,29 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
     .list > li {
       border-top: 1px solid var(--rule);
       padding-block: clamp(2rem, 5vw, 3.25rem);
+    }
+
+    .thumb {
+      display: block;
+      margin-bottom: 1.4rem;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--rule);
+      transition: transform 200ms cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+
+    .thumb:hover {
+      transform: translateY(-2px);
+    }
+
+    .thumb :global(img) {
+      display: block;
+      width: 100%;
+      height: auto;
+      /* Crop to a consistent band so entries with and without a shot line up. */
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      object-position: top center;
     }
 
     .list h2 {

@@ -40,6 +40,16 @@ cd .. && python3 build-resume.py resume-marketing-engineer.md
 # save it to site/public/jeff-liknes-resume.pdf
 ```
 
+## If images render blank or overflow in dev
+
+The dev server caches the content layer and scoped CSS, and goes stale when you add
+files to `src/assets/` or change `src/content.config.ts`. The build output is fine;
+only dev is wrong. Fix:
+
+```bash
+npx astro dev stop && rm -rf .astro node_modules/.vite && npm run dev
+```
+
 ## Deploy
 
 Vercel, static output, no adapter needed. Set the real domain in `astro.config.mjs`

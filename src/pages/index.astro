@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import EvidenceRail from '../components/EvidenceRail.astro';
 
@@ -77,6 +78,11 @@ const skills = [
       {
         featured.map((entry) => (
           <li>
+            {entry.data.image && entry.data.imageAlt && (
+              <a class="thumb" href={`/work/${entry.id}/`} tabindex="-1" aria-hidden="true">
+                <Image src={entry.data.image} alt="" widths={[420, 840]} sizes="(min-width: 46rem) 24rem, 92vw" />
+              </a>
+            )}
             <h2>
               <a href={`/work/${entry.id}/`}>{entry.data.title}</a>
             </h2>
@@ -141,6 +147,34 @@ const skills = [
     .cases li {
       border-top: 1px solid var(--rule);
       padding-top: 1.4rem;
+    }
+
+    @media (min-width: 46rem) {
+      .cases {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    .thumb {
+      display: block;
+      margin-bottom: 1.2rem;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--rule);
+      transition: transform 200ms cubic-bezier(0.2, 0.7, 0.2, 1);
+    }
+
+    .thumb:hover {
+      transform: translateY(-2px);
+    }
+
+    .thumb :global(img) {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      object-position: top center;
     }
 
     .cases h2 {
