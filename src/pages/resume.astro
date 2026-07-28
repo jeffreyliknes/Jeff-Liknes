@@ -6,19 +6,19 @@ import Base from '../layouts/Base.astro';
 const hasPdf = existsSync('public/jeff-liknes-resume.pdf');
 
 // Seeded from master-resume.md, then edited for the web. This is now its own
-// copy — changes to the master resume do not flow here.
+// copy. Changes to the master resume do not flow here.
 const experience = [
   {
     role: 'Web Designer / Developer',
     org: 'Sojern',
     note: 'Joined Myhotelshop GmbH; acquired by RateGain in 2021, moved under the Sojern brand after RateGain’s 2025 acquisition. One continuous role throughout.',
     period: 'April 2021 – present',
-    place: 'Leipzig, Germany — remote from Spain',
+    place: 'Leipzig, Germany · remote from Spain',
     points: [
       'Own technical SEO across a 70+ site multilingual (DE/EN) hotel portfolio, including JSON-LD Hotel and LodgingBusiness schema across multiple brands.',
-      'Google Tag Manager and consent architecture portfolio-wide — Consent Mode v2 via Cookiebot and consentmanager, GDPR-compliant lazy-loading GTM.',
+      'Google Tag Manager and consent architecture portfolio-wide: Consent Mode v2 via Cookiebot and consentmanager, GDPR-compliant lazy-loading GTM.',
       'Led the evaluation to move 70 hotel sites off Sitejet onto a headless stack (Astro, Storyblok/TinaCMS, GitHub, Vercel/Cloudflare), with cost models comparing Sitejet, Webflow and a custom build.',
-      'Built an AI-assisted build pipeline — Claude Code CLI, Cursor and a headless CMS generating a full site from a single prompt — plus n8n workflows for widget and schema deployment and a Postgres pipeline over the Search Console and Google Ads APIs.',
+      'Built an AI-assisted build pipeline (Claude Code CLI, Cursor and a headless CMS generating a full site from a single prompt), plus n8n workflows for widget and schema deployment and a Postgres pipeline over the Search Console and Google Ads APIs.',
       'Built and piloted a GEO/AI visibility toolkit scoring hotel domains on their presence in AI answer engines, and set the portfolio GEO strategy.',
       'Authored language-v2.js, resolving a routing conflict with a third-party translation widget across the portfolio; own redirect and URL-routing architecture (301/302/410/415, path vs absolute resolution) across multi-site deployments.',
       'Manage property-manager and hotel-client relationships across German and English-speaking markets; train new designers; present monthly all-hands updates.',
@@ -31,7 +31,7 @@ const experience = [
     period: 'May 2026 – present',
     place: 'B2B construction-project intelligence for Canadian contractors',
     points: [
-      'Nine-source ingestion pipeline normalising Canadian construction projects into one SQLite schema — Socrata, ArcGIS REST and OpenDataSoft municipal permit APIs, BC Major Projects, BC Environmental Assessment registry, federal CanadaBuys — with dedup and per-source incremental fetch state. 3,161 projects tracked.',
+      'Nine-source ingestion pipeline normalising Canadian construction projects into one SQLite schema, covering Socrata, ArcGIS REST and OpenDataSoft municipal permit APIs, BC Major Projects, the BC Environmental Assessment registry and federal CanadaBuys, with dedup and per-source incremental fetch state. 3,161 projects tracked.',
       'Eleven Python agent packages (~9,800 lines) running unattended on systemd timers with OnFailure alerting; per-run budget caps added after a hung third-party job exhausted a monthly API quota.',
       'Per-subscriber personalisation reading Stripe profile metadata to filter and rank projects, generating a weekly digest through the Claude API.',
       'Customer-facing product in Next.js 16 / React 19 / TypeScript / Tailwind 4 on Vercel: marketing site, gated sample funnel, Stripe Checkout and subscription onboarding, internal outreach approval dashboard.',
@@ -41,7 +41,7 @@ const experience = [
   {
     role: 'Website design, build and growth',
     org: 'Concrete Genius Mfg.',
-    note: 'concretegenius.com — Alberta manufacturer of mobile volumetric concrete mixers and batching plants.',
+    note: 'concretegenius.com · Alberta manufacturer of mobile volumetric concrete mixers and batching plants.',
     period: '2025 – 2026',
     place: 'Remote, solo engagement',
     points: [
@@ -49,7 +49,7 @@ const experience = [
       'Deployed on Vercel with per-branch previews, environment-driven canonicals so previews never leak into the index, and a 16-rule permanent-redirect map preserving link equity through an IA restructure.',
       'Full technical SEO: generated sitemap and robots.txt, canonicals, Open Graph, and JSON-LD across Organization, LocalBusiness, WebSite/SearchAction, Product, Brand and FAQPage. Search Console monitored to prioritise page and copy work.',
       'Built the measurement stack: production-gated GTM, form and call conversion tracking, Consent Mode v2, CookieYes loading ahead of GTM, and the privacy and cookie policies to match.',
-      'Ran 18 months of Google and Meta advertising — €13,700 of spend, 205 enquiries, €67 blended cost per enquiry. Found image-led campaigns delivered 44% of enquiries for 35% of spend, stopped a €533-per-enquiry campaign, and paused search rather than keep funding targeting that was wrong from the start.',
+      'Ran 18 months of Google and Meta advertising across €13,700 of spend, 205 enquiries, €67 blended cost per enquiry. Found image-led campaigns delivered 44% of enquiries for 35% of spend, stopped a €533-per-enquiry campaign, and paused search rather than keep funding targeting that was wrong from the start.',
     ],
   },
   {
@@ -91,14 +91,14 @@ const education = [
 ---
 
 <Base
-  title="Resume — Jeffrey Liknes"
+  title="Resume · Jeffrey Liknes"
   description="Eight years across front-end build, technical SEO, tag management and analytics. Full working history, skills and education."
 >
   <section class="wrap head">
     <p class="eyebrow">Resume</p>
     <h1>Jeffrey Liknes</h1>
     <p class="lede">
-      Eight years across front-end build, technical SEO, tag management and analytics — most
+      Eight years across front-end build, technical SEO, tag management and analytics, most
       recently owning the web and marketing stack for a 70+ site multilingual hotel portfolio,
       and building an autonomous data product end to end on the side. I ship the site and then
       own whether it worked.
@@ -106,7 +106,7 @@ const education = [
     <dl class="contact">
       <div><dt>Email</dt><dd><a href="mailto:jeff.liknes@gmail.com">jeff.liknes@gmail.com</a></dd></div>
       <div><dt>Phone</dt><dd><a href="tel:+34711014627">+34 711 014 627</a></dd></div>
-      <div><dt>Location</dt><dd>Spain — Canadian citizen</dd></div>
+      <div><dt>Location</dt><dd>Spain · Canadian citizen</dd></div>
       <div><dt>LinkedIn</dt><dd><a href="https://linkedin.com/in/jeff-liknes/">jeff-liknes</a></dd></div>
     </dl>
     {hasPdf && <p class="download"><a href="/jeff-liknes-resume.pdf">Download as PDF</a></p>}
@@ -120,7 +120,7 @@ const education = [
           <li>
             <div class="role-head">
               <h2>
-                {job.role} — {job.org}
+                {job.role} · {job.org}
               </h2>
               <p class="meta">
                 {job.period} · {job.place}
@@ -189,22 +189,22 @@ const education = [
     }
 
     .contact dt {
-      font-family: var(--mono);
+      font-family: var(--label);
       font-size: 0.7rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--pencil);
+      color: var(--ink-soft);
       margin-bottom: 0.3rem;
     }
 
     .contact dd {
       margin: 0;
-      font-family: var(--mono);
+      font-family: var(--label);
       font-size: 0.88rem;
     }
 
     .download {
-      font-family: var(--mono);
+      font-family: var(--label);
       font-size: 0.85rem;
       margin-top: 1.8rem;
     }
@@ -235,16 +235,16 @@ const education = [
     }
 
     .meta {
-      font-family: var(--mono);
+      font-family: var(--label);
       font-size: 0.74rem;
-      color: var(--pencil);
+      color: var(--ink-soft);
       margin: 0;
       max-width: none;
     }
 
     .note {
       font-size: 0.88rem;
-      color: var(--pencil);
+      color: var(--ink-soft);
       margin: 0.8rem 0 0;
       max-width: none;
     }
@@ -273,9 +273,9 @@ const education = [
     }
 
     .plain span {
-      font-family: var(--mono);
+      font-family: var(--label);
       font-size: 0.78rem;
-      color: var(--pencil);
+      color: var(--ink-soft);
     }
   </style>
 </Base>

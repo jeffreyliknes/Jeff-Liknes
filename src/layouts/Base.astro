@@ -35,6 +35,8 @@ const here = Astro.url.pathname;
   <body>
     <a class="skip" href="#main">Skip to content</a>
 
+    <hr class="stripe" />
+
     <header class="masthead">
       <div class="wrap masthead-inner">
         <a class="wordmark" href="/">Jeffrey Liknes</a>
@@ -75,7 +77,7 @@ const here = Astro.url.pathname;
         position: absolute;
         left: -9999px;
         background: var(--ink);
-        color: var(--paper);
+        color: var(--canvas-raised);
         padding: 0.6rem 1rem;
       }
       .skip:focus {
@@ -99,10 +101,9 @@ const here = Astro.url.pathname;
 
       .wordmark {
         font-family: var(--display);
-        font-stretch: 125%;
         font-weight: 700;
-        font-size: 1.05rem;
-        letter-spacing: -0.01em;
+        font-size: 1.35rem;
+        letter-spacing: 0.01em;
         color: var(--ink);
         text-decoration: none;
       }
@@ -116,10 +117,12 @@ const here = Astro.url.pathname;
       }
 
       nav a {
-        font-family: var(--mono);
-        font-size: 0.78rem;
-        letter-spacing: 0.06em;
-        color: var(--pencil);
+        font-family: var(--label);
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--ink-soft);
         text-decoration: none;
         padding-bottom: 0.15rem;
         border-bottom: 1px solid transparent;
@@ -131,7 +134,7 @@ const here = Astro.url.pathname;
 
       nav a[aria-current='page'] {
         color: var(--ink);
-        border-bottom-color: var(--flag);
+        border-bottom-color: var(--clay);
       }
 
       .colophon {
@@ -149,8 +152,9 @@ const here = Astro.url.pathname;
         display: flex;
         flex-wrap: wrap;
         gap: 0.5rem 1.5rem;
-        font-family: var(--mono);
-        font-size: 0.82rem;
+        font-family: var(--label);
+        font-size: 0.85rem;
+        font-weight: 500;
         max-width: none;
         margin: 0;
       }

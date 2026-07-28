@@ -6,7 +6,7 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
 ---
 
 <Base
-  title="Work — Jeffrey Liknes"
+  title="Work · Jeffrey Liknes"
   description="Case studies in web build, technical SEO, analytics and paid acquisition, each with the numbers it produced."
 >
   <section class="wrap head">
@@ -34,8 +34,8 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
           </div>
           <ul class="rail">
             {entry.data.evidence.slice(0, 3).map((item) => (
-              <li>
-                <span class="value" data-tone={item.tone}>{item.value}</span>
+              <li class="patch reveal" data-tone={item.tone}>
+                <span class="value">{item.value}</span>
                 <span class="label">{item.label}</span>
               </li>
             ))}
@@ -61,7 +61,7 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
 
     .list {
       list-style: none;
-      /* margin-block only — a `margin: 0` shorthand here would cancel .wrap's
+      /* margin-block only. A `margin: 0` shorthand here would cancel .wrap's
          margin-inline: auto and knock the list out of the page grid. */
       margin-block: 0;
       padding-bottom: clamp(3rem, 8vw, 6rem);
@@ -85,20 +85,20 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
     }
 
     .list h2 a:hover {
-      color: var(--signal);
+      color: var(--forest);
     }
 
     .meta {
-      font-family: var(--mono);
+      font-family: var(--label);
       font-size: 0.76rem;
-      color: var(--pencil);
+      color: var(--ink-soft);
       margin-bottom: 0.9rem;
     }
 
     .stack {
-      font-family: var(--mono);
+      font-family: var(--label);
       font-size: 0.74rem;
-      color: var(--pencil);
+      color: var(--ink-soft);
       margin: 1.2rem 0 0;
       max-width: 52ch;
     }

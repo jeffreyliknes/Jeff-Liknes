@@ -8,9 +8,11 @@ interface Item {
 interface Props {
   heading?: string;
   items: Item[];
+  /** Hero patches animate on load; everything else waits for the scroll. */
+  onLoad?: boolean;
 }
 
-const { heading = 'Evidence', items } = Astro.props;
+const { heading = 'Evidence', items, onLoad = false } = Astro.props;
 ---
 
 <aside class="evidence">
@@ -18,8 +20,12 @@ const { heading = 'Evidence', items } = Astro.props;
   <ul class="rail">
     {
       items.map((item, i) => (
-        <li class="draw" style={`animation-delay:${80 * i}ms`}>
-          <span class="value" data-tone={item.tone ?? 'signal'}>{item.value}</span>
+        <li
+          class:list={['patch', onLoad ? 'settle' : 'reveal']}
+          data-tone={item.tone ?? 'signal'}
+          style={onLoad ? `animation-delay:${90 * i}ms` : undefined}
+        >
+          <span class="value">{item.value}</span>
           <span class="label">{item.label}</span>
         </li>
       ))

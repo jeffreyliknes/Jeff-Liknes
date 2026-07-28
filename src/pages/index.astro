@@ -43,31 +43,31 @@ const skills = [
 ---
 
 <Base
-  title="Jeffrey Liknes — web & marketing developer"
+  title="Jeffrey Liknes · web and marketing developer"
   description="Web and marketing developer working across technical SEO, analytics and front-end build. Eight years of shipping sites and measuring whether they worked."
 >
   <section class="hero wrap">
-    <p class="eyebrow">Web &amp; marketing developer — technical SEO, analytics, front end</p>
+    <p class="eyebrow">Web &amp; marketing developer · technical SEO, analytics, front end</p>
     <h1>The number I'm proudest of is the one where I stopped.</h1>
     <div class="split hero-body">
       <div>
         <p class="lede">
-          I build websites and then measure whether they worked. Eight years of it — currently
+          I build websites and then measure whether they worked. Eight years of it, currently
           owning the web and marketing stack for a 70+ site multilingual hotel portfolio at
           Sojern, and running a construction-intelligence product I built end to end on the side.
         </p>
         <p>
           The measuring is the part most portfolios leave out, because measuring honestly means
           publishing the campaign that cost €533 a lead before I killed it, and the data source
-          that is still blocked by Cloudflare. Every project below carries its numbers, including
-          the ones in red. That is the whole idea.
+          that is still blocked by Cloudflare. Every project below carries its numbers, and the
+          ones that went wrong get the same size patch as the ones that worked.
         </p>
         <p class="actions">
           <a href="/work/">See the work</a>
           <a href="/resume/">Read the resume</a>
         </p>
       </div>
-      <EvidenceRail heading="Selected numbers" items={headline} />
+      <EvidenceRail heading="Selected numbers" items={headline} onLoad />
     </div>
   </section>
 
@@ -125,7 +125,7 @@ const skills = [
       display: flex;
       flex-wrap: wrap;
       gap: 0.6rem 1.75rem;
-      font-family: var(--mono);
+      font-family: var(--label);
       font-size: 0.85rem;
       margin-top: 2rem;
     }
@@ -154,13 +154,13 @@ const skills = [
     }
 
     .cases h2 a:hover {
-      color: var(--signal);
+      color: var(--forest);
     }
 
     .meta {
-      font-family: var(--mono);
+      font-family: var(--label);
       font-size: 0.78rem;
-      color: var(--pencil);
+      color: var(--ink-soft);
       margin-bottom: 0.8rem;
     }
 
@@ -183,11 +183,11 @@ const skills = [
     }
 
     .skills dt {
-      font-family: var(--mono);
+      font-family: var(--label);
       font-size: 0.75rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--pencil);
+      color: var(--ink-soft);
       margin-bottom: 0.5rem;
     }
 

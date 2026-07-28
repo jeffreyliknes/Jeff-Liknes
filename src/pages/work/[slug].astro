@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import EvidenceRail from '../../components/EvidenceRail.astro';
 
@@ -10,10 +11,10 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
-const { title, client, period, role, url, stack, evidence } = entry.data;
+const { title, client, period, role, url, stack, evidence, image, imageAlt } = entry.data;
 ---
 
-<Base title={`${title} — Jeffrey Liknes`} description={entry.data.summary}>
+<Base title={`${title} · Jeffrey Liknes`} description={entry.data.summary}>
   <article>
     <header class="wrap head">
       <p class="eyebrow">{client} · {period}</p>
@@ -21,6 +22,14 @@ const { title, client, period, role, url, stack, evidence } = entry.data;
       <p class="role">{role}</p>
       {url && <p class="visit"><a href={url}>{url.replace('https://', '')}</a></p>}
     </header>
+
+    {
+      image && imageAlt && (
+        <figure class="shot wrap">
+          <Image src={image} alt={imageAlt} widths={[640, 1000, 1600]} sizes="(min-width: 78rem) 72rem, 92vw" loading="eager" />
+        </figure>
+      )
+    }
 
     <div class="wrap split body">
       <div class="prose">
@@ -45,16 +54,28 @@ const { title, client, period, role, url, stack, evidence } = entry.data;
     }
 
     .role {
-      font-family: var(--mono);
+      font-family: var(--label);
       font-size: 0.82rem;
-      color: var(--pencil);
+      color: var(--ink-soft);
       margin: 1.4rem 0 0;
     }
 
     .visit {
-      font-family: var(--mono);
+      font-family: var(--label);
       font-size: 0.82rem;
       margin: 0.4rem 0 0;
+    }
+
+    .shot {
+      margin: 0 auto clamp(2rem, 5vw, 3.5rem);
+    }
+
+    .shot :global(img) {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: var(--radius);
+      border: 1px solid var(--rule);
     }
 
     .body {
@@ -62,7 +83,7 @@ const { title, client, period, role, url, stack, evidence } = entry.data;
       padding-block: clamp(2rem, 5vw, 3.5rem) clamp(3rem, 7vw, 5rem);
     }
 
-    /* Markdown output — styled here rather than globally so prose rules stay scoped. */
+    /* Markdown output, styled here rather than globally so prose rules stay scoped. */
     .prose :global(h2) {
       font-size: clamp(1.3rem, 1.1rem + 0.9vw, 1.7rem);
       margin: 2.5rem 0 0.9rem;
@@ -77,7 +98,7 @@ const { title, client, period, role, url, stack, evidence } = entry.data;
     }
 
     .prose :global(em) {
-      color: var(--pencil);
+      color: var(--ink-soft);
     }
 
     .prose :global(ul) {
@@ -90,9 +111,9 @@ const { title, client, period, role, url, stack, evidence } = entry.data;
     }
 
     .stack {
-      font-family: var(--mono);
+      font-family: var(--label);
       font-size: 0.74rem;
-      color: var(--pencil);
+      color: var(--ink-soft);
       border-top: 1px solid var(--rule);
       padding-top: 1rem;
       margin-top: 2.5rem;
@@ -100,7 +121,7 @@ const { title, client, period, role, url, stack, evidence } = entry.data;
     }
 
     .back {
-      font-family: var(--mono);
+      font-family: var(--label);
       font-size: 0.82rem;
       padding-bottom: clamp(2rem, 5vw, 4rem);
     }
