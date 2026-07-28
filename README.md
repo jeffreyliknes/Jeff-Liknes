@@ -23,11 +23,17 @@ independent, and the master resume remains the source for the PDF sent to employ
 
 Every case study's frontmatter carries an `evidence` list. Each entry has a `tone`:
 
-- `signal` (default): forest green, a result that went well
-- `flag`: clay, a result that went badly and is published anyway
-- `neutral`: ochre, a fact that is neither
+- `flag`: always clay, a result that went badly and is published anyway
+- `signal` (default) and `neutral`: no fixed colour. They rotate through
+  sand, sage, wheat and forest by position, via `:nth-child` in `global.css`
 
-The flags are the point of the design. Don't quietly delete them.
+Clay is deliberately kept out of the rotation so it still reads as "this one
+went wrong" rather than as decoration. The flags are the point of the design.
+Don't quietly delete them, and don't add clay to the rotation.
+
+Each patch background is paired with the one text colour that clears 4.5:1
+against it (`--patch-sand` / `--patch-sand-ink`, and so on). Change a
+background and you change its ink with it.
 
 ## Resume PDF
 

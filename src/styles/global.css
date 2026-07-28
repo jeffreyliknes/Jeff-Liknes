@@ -18,6 +18,15 @@
   --clay: #a5502c;
   --moss: #7f8f60;
 
+  /* Patch rotation. Each background is paired with the only text colour that
+     clears 4.5:1 against it, so the pairs move together or not at all. */
+  --patch-sand: #e8cfc2;
+  --patch-sand-ink: #5a3a2a;
+  --patch-sage: #a9bfa6;
+  --patch-sage-ink: #2b3f2d;
+  --patch-wheat: #e8d68a;
+  --patch-wheat-ink: #46401b;
+
   --display: 'Bodoni Moda', Georgia, serif;
   --body: 'Source Serif 4', Georgia, serif;
   --label: 'Archivo Variable', system-ui, sans-serif;
@@ -133,12 +142,31 @@ a:hover {
     box-shadow 200ms ease;
 }
 
-.patch[data-tone='neutral'] {
-  background: var(--ochre);
-  color: var(--ink);
+/* Rotate the palette down the rail. nth-child keeps this in CSS, so both the
+   hero rail and the work list get it without touching either template. */
+.rail .patch:nth-child(4n + 1) {
+  background: var(--patch-sand);
+  color: var(--patch-sand-ink);
 }
 
-.patch[data-tone='flag'] {
+.rail .patch:nth-child(4n + 2) {
+  background: var(--patch-sage);
+  color: var(--patch-sage-ink);
+}
+
+.rail .patch:nth-child(4n + 3) {
+  background: var(--patch-wheat);
+  color: var(--patch-wheat-ink);
+}
+
+.rail .patch:nth-child(4n + 4) {
+  background: var(--forest);
+  color: var(--canvas-raised);
+}
+
+/* Last, so it beats the rotation at equal specificity. Clay is never in the
+   rotation, which is what keeps it readable as "this one went wrong". */
+.rail .patch[data-tone='flag'] {
   background: var(--clay);
   color: var(--canvas-raised);
 }
