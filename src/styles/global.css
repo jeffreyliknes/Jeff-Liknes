@@ -1,0 +1,186 @@
+/* wdth.css carries the width axis — font-stretch is inert without it. */
+@import '@fontsource-variable/archivo/wdth.css';
+@import '@fontsource/source-serif-4/400.css';
+@import '@fontsource/source-serif-4/600.css';
+@import '@fontsource/ibm-plex-mono/400.css';
+@import '@fontsource/ibm-plex-mono/500.css';
+
+:root {
+  /* Notebook logic: black text, blue annotation, red correction. */
+  --paper: #e8e9e4;
+  --paper-raised: #f3f4f0;
+  --ink: #14171a;
+  --pencil: #6c716c;
+  --rule: #c9ccc4;
+  --signal: #16357a;
+  --flag: #a83a20;
+
+  --display: 'Archivo Variable', system-ui, sans-serif;
+  --body: 'Source Serif 4', Georgia, serif;
+  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  --measure: 62ch;
+  --gutter: clamp(1.25rem, 5vw, 4rem);
+  --page: 78rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+  line-height: 1.6;
+  font-synthesis-weight: none;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--display);
+  font-stretch: 125%;
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  margin: 0;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(2.4rem, 1.4rem + 4.6vw, 5.25rem);
+}
+
+h2 {
+  font-size: clamp(1.6rem, 1.2rem + 1.8vw, 2.5rem);
+}
+
+h3 {
+  font-size: clamp(1.15rem, 1rem + 0.7vw, 1.45rem);
+}
+
+p {
+  margin: 0 0 1em;
+  max-width: var(--measure);
+}
+
+a {
+  color: var(--signal);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 3px;
+}
+
+/* --- shared primitives ------------------------------------------------ */
+
+.wrap {
+  max-width: var(--page);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Eyebrow labels: mono, because everything that classifies is data. */
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--pencil);
+  margin: 0 0 0.9rem;
+  max-width: none; /* overrides the prose measure — these are single-line labels */
+}
+
+/* The evidence rail: claim on the left, what it measured on the right. */
+.rail {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 1.4rem;
+}
+
+.rail li {
+  border-top: 1px solid var(--rule);
+  padding-top: 0.7rem;
+}
+
+.rail .value {
+  display: block;
+  font-family: var(--mono);
+  font-size: clamp(1.3rem, 1.1rem + 0.9vw, 1.9rem);
+  font-weight: 500;
+  line-height: 1.05;
+  color: var(--signal);
+  font-variant-numeric: tabular-nums;
+}
+
+.rail .value[data-tone='flag'] {
+  color: var(--flag);
+}
+
+.rail .value[data-tone='neutral'] {
+  color: var(--ink);
+}
+
+.rail .label {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.74rem;
+  line-height: 1.45;
+  color: var(--pencil);
+  margin-top: 0.4rem;
+  text-wrap: pretty;
+}
+
+/* Two-column claim/evidence layout, collapsing to stacked on small screens. */
+.split {
+  display: grid;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: start;
+}
+
+@media (min-width: 60rem) {
+  .split {
+    grid-template-columns: minmax(0, 1fr) 19rem;
+  }
+}
+
+.section {
+  padding-block: clamp(3.5rem, 8vw, 7rem);
+  border-top: 1px solid var(--rule);
+}
+
+/* One motion idea: rules draw in like a plotter pass. */
+@media (prefers-reduced-motion: no-preference) {
+  .draw {
+    transform-origin: left;
+    animation: draw 620ms cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+  }
+}
+
+@keyframes draw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}

@@ -1,0 +1,159 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+
+const nav = [
+  { href: '/', label: 'Index' },
+  { href: '/work/', label: 'Work' },
+  { href: '/resume/', label: 'Resume' },
+  { href: '/contact/', label: 'Contact' },
+];
+const here = Astro.url.pathname;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="masthead">
+      <div class="wrap masthead-inner">
+        <a class="wordmark" href="/">Jeffrey Liknes</a>
+        <nav aria-label="Main">
+          <ul>
+            {
+              nav.map(({ href, label }) => (
+                <li>
+                  <a href={href} aria-current={here === href ? 'page' : undefined}>
+                    {label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="colophon">
+      <div class="wrap">
+        <p class="eyebrow">Built with Astro. No trackers, no cookie banner, nothing to consent to.</p>
+        <p class="colophon-links">
+          <a href="mailto:jeff.liknes@gmail.com">jeff.liknes@gmail.com</a>
+          <a href="tel:+34711014627">+34 711 014 627</a>
+          <a href="https://linkedin.com/in/jeff-liknes/">LinkedIn</a>
+          <a href="https://github.com/jeffreyliknes">GitHub</a>
+        </p>
+      </div>
+    </footer>
+
+    <style>
+      .skip {
+        position: absolute;
+        left: -9999px;
+        background: var(--ink);
+        color: var(--paper);
+        padding: 0.6rem 1rem;
+      }
+      .skip:focus {
+        left: 1rem;
+        top: 1rem;
+        z-index: 10;
+      }
+
+      .masthead {
+        border-bottom: 1px solid var(--rule);
+      }
+
+      .masthead-inner {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem 1.5rem;
+        align-items: baseline;
+        justify-content: space-between;
+        padding-block: 1.1rem;
+      }
+
+      .wordmark {
+        font-family: var(--display);
+        font-stretch: 125%;
+        font-weight: 700;
+        font-size: 1.05rem;
+        letter-spacing: -0.01em;
+        color: var(--ink);
+        text-decoration: none;
+      }
+
+      nav ul {
+        display: flex;
+        gap: 1.35rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      nav a {
+        font-family: var(--mono);
+        font-size: 0.78rem;
+        letter-spacing: 0.06em;
+        color: var(--pencil);
+        text-decoration: none;
+        padding-bottom: 0.15rem;
+        border-bottom: 1px solid transparent;
+      }
+
+      nav a:hover {
+        color: var(--ink);
+      }
+
+      nav a[aria-current='page'] {
+        color: var(--ink);
+        border-bottom-color: var(--flag);
+      }
+
+      .colophon {
+        border-top: 1px solid var(--rule);
+        padding-block: 2.5rem 3.5rem;
+      }
+
+      .colophon .eyebrow {
+        margin-bottom: 1rem;
+        text-transform: none;
+        letter-spacing: 0.02em;
+      }
+
+      .colophon-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem 1.5rem;
+        font-family: var(--mono);
+        font-size: 0.82rem;
+        max-width: none;
+        margin: 0;
+      }
+    </style>
+  </body>
+</html>

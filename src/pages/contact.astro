@@ -1,0 +1,100 @@
+---
+import Base from '../layouts/Base.astro';
+
+const subject = encodeURIComponent('Role enquiry — Jeffrey Liknes');
+---
+
+<Base
+  title="Contact — Jeffrey Liknes"
+  description="Get in touch with Jeffrey Liknes about web development, technical SEO and analytics work."
+>
+  <section class="wrap">
+    <p class="eyebrow">Contact</p>
+    <h1>No form. Just email me.</h1>
+    <p class="lede">
+      A contact form would put a third party between you and my inbox to collect an address I
+      have already published. Open for permanent roles and contract work — remote, or based in
+      Spain.
+    </p>
+
+    <ul class="channels">
+      <li>
+        <span class="label">Email</span>
+        <a class="primary" href={`mailto:jeff.liknes@gmail.com?subject=${subject}`}>
+          jeff.liknes@gmail.com
+        </a>
+      </li>
+      <li>
+        <span class="label">Phone</span>
+        <a class="primary" href="tel:+34711014627">+34 711 014 627</a>
+      </li>
+      <li>
+        <span class="label">LinkedIn</span>
+        <a class="primary" href="https://linkedin.com/in/jeff-liknes/">in/jeff-liknes</a>
+      </li>
+      <li>
+        <span class="label">GitHub</span>
+        <a class="primary" href="https://github.com/jeffreyliknes">jeffreyliknes</a>
+      </li>
+    </ul>
+
+    <p class="note">
+      If you are hiring: the <a href="/resume/">resume</a> has the full history, and each
+      <a href="/work/">case study</a> carries the numbers behind it.
+    </p>
+  </section>
+
+  <style>
+    section {
+      padding-block: clamp(2.5rem, 7vw, 5rem) clamp(3rem, 8vw, 6rem);
+    }
+
+    h1 {
+      max-width: 14ch;
+      margin-bottom: 1.5rem;
+    }
+
+    .lede {
+      font-size: 1.15em;
+      line-height: 1.5;
+    }
+
+    .channels {
+      list-style: none;
+      margin: clamp(2rem, 5vw, 3.5rem) 0 0;
+      padding: 0;
+      display: grid;
+      gap: 0;
+      max-width: 34rem;
+    }
+
+    .channels li {
+      border-top: 1px solid var(--rule);
+      padding-block: 1.1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem 1.5rem;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+
+    .label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--pencil);
+    }
+
+    .primary {
+      font-family: var(--mono);
+      font-size: clamp(1rem, 0.9rem + 0.4vw, 1.2rem);
+    }
+
+    .note {
+      margin-top: 2.5rem;
+      font-size: 0.92rem;
+      color: var(--pencil);
+    }
+  </style>
+</Base>

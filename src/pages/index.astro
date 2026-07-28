@@ -1,0 +1,199 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import EvidenceRail from '../components/EvidenceRail.astro';
+
+const featured = (await getCollection('work'))
+  .filter((entry) => entry.data.featured)
+  .sort((a, b) => a.data.order - b.data.order);
+
+const headline = [
+  { value: '€67', label: 'Average cost per enquiry across €13,700 of managed ad spend' },
+  { value: '€533', label: 'Cost per enquiry on the campaign I stopped', tone: 'flag' as const },
+  { value: '70+', label: 'Multilingual hotel sites under one technical SEO strategy' },
+  { value: '3,161', label: 'Construction projects in a pipeline I built and run alone' },
+];
+
+const skills = [
+  {
+    area: 'Technical SEO',
+    items: 'JSON-LD and schema.org, site architecture, multilingual and hreflang, redirect design, Search Console, Ahrefs, keyword strategy',
+  },
+  {
+    area: 'Analytics & consent',
+    items: 'Google Tag Manager, GA4, Consent Mode v2, Cookiebot, consentmanager, CookieYes, GDPR consent architecture, Google Ads API, Search Console API',
+  },
+  {
+    area: 'Front end',
+    items: 'Astro, TypeScript, React, Next.js, HTML, SCSS, Tailwind, JavaScript, design-token systems',
+  },
+  {
+    area: 'Automation & back end',
+    items: 'Python, n8n, Postgres, SQLite, REST APIs, systemd, Claude API, Resend, Stripe',
+  },
+  {
+    area: 'CMS & platforms',
+    items: 'Storyblok, TinaCMS, Webflow, Sitejet, WordPress, Vercel, Cloudflare, GitHub',
+  },
+  {
+    area: 'Paid media',
+    items: 'Google Ads (Search, Demand Gen, DSA), Meta Ads, conversion tracking, A/B testing, cost-per-lead modelling',
+  },
+];
+---
+
+<Base
+  title="Jeffrey Liknes — web & marketing developer"
+  description="Web and marketing developer working across technical SEO, analytics and front-end build. Eight years of shipping sites and measuring whether they worked."
+>
+  <section class="hero wrap">
+    <p class="eyebrow">Web &amp; marketing developer — technical SEO, analytics, front end</p>
+    <h1>The number I'm proudest of is the one where I stopped.</h1>
+    <div class="split hero-body">
+      <div>
+        <p class="lede">
+          I build websites and then measure whether they worked. Eight years of it — currently
+          owning the web and marketing stack for a 70+ site multilingual hotel portfolio at
+          Sojern, and running a construction-intelligence product I built end to end on the side.
+        </p>
+        <p>
+          The measuring is the part most portfolios leave out, because measuring honestly means
+          publishing the campaign that cost €533 a lead before I killed it, and the data source
+          that is still blocked by Cloudflare. Every project below carries its numbers, including
+          the ones in red. That is the whole idea.
+        </p>
+        <p class="actions">
+          <a href="/work/">See the work</a>
+          <a href="/resume/">Read the resume</a>
+        </p>
+      </div>
+      <EvidenceRail heading="Selected numbers" items={headline} />
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <p class="eyebrow">Selected work</p>
+    <ol class="cases">
+      {
+        featured.map((entry) => (
+          <li>
+            <h2>
+              <a href={`/work/${entry.id}/`}>{entry.data.title}</a>
+            </h2>
+            <p class="meta">
+              {entry.data.client} · {entry.data.period}
+            </p>
+            <p>{entry.data.summary}</p>
+          </li>
+        ))
+      }
+    </ol>
+    <p><a href="/work/">All work, including the pilot that has not proven itself yet</a></p>
+  </section>
+
+  <section class="section wrap">
+    <p class="eyebrow">What I work with</p>
+    <h2>Skills</h2>
+    <dl class="skills">
+      {
+        skills.map(({ area, items }) => (
+          <div>
+            <dt>{area}</dt>
+            <dd>{items}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </section>
+
+  <style>
+    .hero {
+      padding-block: clamp(3rem, 9vw, 7rem) clamp(2rem, 5vw, 4rem);
+    }
+
+    .hero h1 {
+      max-width: 16ch;
+      margin-bottom: clamp(2.5rem, 6vw, 4rem);
+    }
+
+    .lede {
+      font-size: 1.2em;
+      line-height: 1.5;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem 1.75rem;
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      margin-top: 2rem;
+    }
+
+    .cases {
+      list-style: none;
+      margin: 0 0 2.5rem;
+      padding: 0;
+      display: grid;
+      gap: clamp(2rem, 4vw, 3rem);
+    }
+
+    .cases li {
+      border-top: 1px solid var(--rule);
+      padding-top: 1.4rem;
+    }
+
+    .cases h2 {
+      max-width: 24ch;
+      margin-bottom: 0.6rem;
+    }
+
+    .cases h2 a {
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .cases h2 a:hover {
+      color: var(--signal);
+    }
+
+    .meta {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--pencil);
+      margin-bottom: 0.8rem;
+    }
+
+    .skills {
+      margin: 2rem 0 0;
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    @media (min-width: 46rem) {
+      .skills {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2rem clamp(2rem, 5vw, 4rem);
+      }
+    }
+
+    .skills div {
+      border-top: 1px solid var(--rule);
+      padding-top: 0.8rem;
+    }
+
+    .skills dt {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--pencil);
+      margin-bottom: 0.5rem;
+    }
+
+    .skills dd {
+      margin: 0;
+      max-width: 42ch;
+    }
+  </style>
+</Base>

@@ -1,0 +1,108 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import EvidenceRail from '../../components/EvidenceRail.astro';
+
+export async function getStaticPaths() {
+  const work = await getCollection('work');
+  return work.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const { title, client, period, role, url, stack, evidence } = entry.data;
+---
+
+<Base title={`${title} — Jeffrey Liknes`} description={entry.data.summary}>
+  <article>
+    <header class="wrap head">
+      <p class="eyebrow">{client} · {period}</p>
+      <h1>{title}</h1>
+      <p class="role">{role}</p>
+      {url && <p class="visit"><a href={url}>{url.replace('https://', '')}</a></p>}
+    </header>
+
+    <div class="wrap split body">
+      <div class="prose">
+        <Content />
+        <p class="stack">{stack.join(' · ')}</p>
+      </div>
+      <EvidenceRail items={evidence} />
+    </div>
+
+    <nav class="wrap back" aria-label="Work">
+      <a href="/work/">← All work</a>
+    </nav>
+  </article>
+
+  <style>
+    .head {
+      padding-block: clamp(2.5rem, 7vw, 5rem) clamp(1.5rem, 4vw, 2.5rem);
+    }
+
+    .head h1 {
+      max-width: 20ch;
+    }
+
+    .role {
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      color: var(--pencil);
+      margin: 1.4rem 0 0;
+    }
+
+    .visit {
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      margin: 0.4rem 0 0;
+    }
+
+    .body {
+      border-top: 1px solid var(--rule);
+      padding-block: clamp(2rem, 5vw, 3.5rem) clamp(3rem, 7vw, 5rem);
+    }
+
+    /* Markdown output — styled here rather than globally so prose rules stay scoped. */
+    .prose :global(h2) {
+      font-size: clamp(1.3rem, 1.1rem + 0.9vw, 1.7rem);
+      margin: 2.5rem 0 0.9rem;
+    }
+
+    .prose :global(h2:first-child) {
+      margin-top: 0;
+    }
+
+    .prose :global(strong) {
+      font-weight: 600;
+    }
+
+    .prose :global(em) {
+      color: var(--pencil);
+    }
+
+    .prose :global(ul) {
+      max-width: var(--measure);
+      padding-left: 1.1rem;
+    }
+
+    .prose :global(li) {
+      margin-bottom: 0.4rem;
+    }
+
+    .stack {
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      color: var(--pencil);
+      border-top: 1px solid var(--rule);
+      padding-top: 1rem;
+      margin-top: 2.5rem;
+      max-width: 52ch;
+    }
+
+    .back {
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      padding-bottom: clamp(2rem, 5vw, 4rem);
+    }
+  </style>
+</Base>

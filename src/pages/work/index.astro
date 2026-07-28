@@ -1,0 +1,106 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<Base
+  title="Work — Jeffrey Liknes"
+  description="Case studies in web build, technical SEO, analytics and paid acquisition, each with the numbers it produced."
+>
+  <section class="wrap head">
+    <p class="eyebrow">Work</p>
+    <h1>Four projects, and what each one measured.</h1>
+    <p class="lede">
+      Listed most-defensible first. Where a result is thin or a pilot has not proven itself, the
+      entry says so rather than borrowing credibility from the ones that did.
+    </p>
+  </section>
+
+  <ol class="list wrap">
+    {
+      work.map((entry) => (
+        <li class="split">
+          <div>
+            <h2>
+              <a href={`/work/${entry.id}/`}>{entry.data.title}</a>
+            </h2>
+            <p class="meta">
+              {entry.data.client} · {entry.data.period} · {entry.data.role}
+            </p>
+            <p>{entry.data.summary}</p>
+            <p class="stack">{entry.data.stack.join(' · ')}</p>
+          </div>
+          <ul class="rail">
+            {entry.data.evidence.slice(0, 3).map((item) => (
+              <li>
+                <span class="value" data-tone={item.tone}>{item.value}</span>
+                <span class="label">{item.label}</span>
+              </li>
+            ))}
+          </ul>
+        </li>
+      ))
+    }
+  </ol>
+
+  <style>
+    .head {
+      padding-block: clamp(2.5rem, 7vw, 5rem) clamp(1.5rem, 4vw, 3rem);
+    }
+
+    .head h1 {
+      max-width: 18ch;
+      margin-bottom: 1.5rem;
+    }
+
+    .lede {
+      font-size: 1.1em;
+    }
+
+    .list {
+      list-style: none;
+      /* margin-block only — a `margin: 0` shorthand here would cancel .wrap's
+         margin-inline: auto and knock the list out of the page grid. */
+      margin-block: 0;
+      padding-bottom: clamp(3rem, 8vw, 6rem);
+      display: grid;
+      gap: 0;
+    }
+
+    .list > li {
+      border-top: 1px solid var(--rule);
+      padding-block: clamp(2rem, 5vw, 3.25rem);
+    }
+
+    .list h2 {
+      max-width: 22ch;
+      margin-bottom: 0.7rem;
+    }
+
+    .list h2 a {
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .list h2 a:hover {
+      color: var(--signal);
+    }
+
+    .meta {
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      color: var(--pencil);
+      margin-bottom: 0.9rem;
+    }
+
+    .stack {
+      font-family: var(--mono);
+      font-size: 0.74rem;
+      color: var(--pencil);
+      margin: 1.2rem 0 0;
+      max-width: 52ch;
+    }
+  </style>
+</Base>

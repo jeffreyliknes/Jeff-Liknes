@@ -1,0 +1,41 @@
+---
+interface Item {
+  value: string;
+  label: string;
+  tone?: 'signal' | 'flag' | 'neutral';
+}
+
+interface Props {
+  heading?: string;
+  items: Item[];
+}
+
+const { heading = 'Evidence', items } = Astro.props;
+---
+
+<aside class="evidence">
+  <p class="eyebrow">{heading}</p>
+  <ul class="rail">
+    {
+      items.map((item, i) => (
+        <li class="draw" style={`animation-delay:${80 * i}ms`}>
+          <span class="value" data-tone={item.tone ?? 'signal'}>{item.value}</span>
+          <span class="label">{item.label}</span>
+        </li>
+      ))
+    }
+  </ul>
+</aside>
+
+<style>
+  .evidence {
+    position: sticky;
+    top: 2rem;
+  }
+
+  @media (max-width: 59.99rem) {
+    .evidence {
+      position: static;
+    }
+  }
+</style>
