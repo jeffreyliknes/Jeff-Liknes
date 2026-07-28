@@ -6,6 +6,8 @@ role: Built and piloted it
 summary: A front-end audit tool that scores a hotel domain on its visibility inside AI search and answer engines, built while the discipline was still being named.
 order: 4
 featured: false
+image: ../../assets/geo-visibility-toolkit.png
+imageAlt: The toolkit's entry screen, headlined "Check Your AI Visibility", with a single field for a website URL and a Generate Report button.
 stack:
   - JavaScript
   - Technical SEO
