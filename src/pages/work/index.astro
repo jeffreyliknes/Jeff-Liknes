@@ -12,23 +12,23 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
 >
   <section class="wrap head">
     <p class="eyebrow">Work</p>
-    <h1>Four projects, and what each one measured.</h1>
+    <h1>Selected work</h1>
     <p class="lede">
-      Listed most-defensible first. Where a result is thin or a pilot has not proven itself, the
-      entry says so rather than borrowing credibility from the ones that did.
+      Five projects across site build, technical SEO, analytics and paid acquisition. Where a
+      result is thin or a pilot has not proven itself, the entry says so.
     </p>
   </section>
 
   <ol class="list wrap">
     {
       work.map((entry) => (
-        <li class="split">
-          <div>
-            {entry.data.image && entry.data.imageAlt && (
-              <a class="thumb" href={`/work/${entry.id}/`} tabindex="-1" aria-hidden="true">
-                <Image src={entry.data.image} alt="" widths={[420, 840]} sizes="(min-width: 60rem) 40rem, 92vw" />
-              </a>
-            )}
+        <li>
+          {entry.data.image && entry.data.imageAlt && (
+            <a class="thumb" href={`/work/${entry.id}/`} tabindex="-1" aria-hidden="true">
+              <Image src={entry.data.image} alt="" widths={[420, 840]} sizes="(min-width: 60rem) 40rem, 92vw" />
+            </a>
+          )}
+          <div class="copy">
             <h2>
               <a href={`/work/${entry.id}/`}>{entry.data.title}</a>
             </h2>
@@ -36,16 +36,13 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
               {entry.data.client} · {entry.data.period} · {entry.data.role}
             </p>
             <p>{entry.data.summary}</p>
+            <ul class="bullets">
+              {entry.data.bullets.map((point) => (
+                <li>{point}</li>
+              ))}
+            </ul>
             <p class="stack">{entry.data.stack.join(' · ')}</p>
           </div>
-          <ul class="rail">
-            {entry.data.evidence.slice(0, 3).map((item) => (
-              <li class="patch reveal" data-tone={item.tone}>
-                <span class="value">{item.value}</span>
-                <span class="label">{item.label}</span>
-              </li>
-            ))}
-          </ul>
         </li>
       ))
     }
@@ -78,11 +75,21 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
     .list > li {
       border-top: 1px solid var(--rule);
       padding-block: clamp(2rem, 5vw, 3.25rem);
+      display: grid;
+      gap: clamp(1.4rem, 4vw, 3.5rem);
+      align-items: start;
+    }
+
+    /* Shot beside the copy once there's room. Stacked below that, where a
+       full-width thumb reads fine. */
+    @media (min-width: 60rem) {
+      .list > li {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      }
     }
 
     .thumb {
       display: block;
-      margin-bottom: 1.4rem;
       border-radius: var(--radius);
       overflow: hidden;
       border: 1px solid var(--rule);
@@ -122,6 +129,16 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
       font-size: 0.76rem;
       color: var(--ink-soft);
       margin-bottom: 0.9rem;
+    }
+
+    .bullets {
+      margin: 1rem 0 0;
+      padding-left: 1.05rem;
+    }
+
+    .bullets li {
+      margin-bottom: 0.45rem;
+      max-width: var(--measure);
     }
 
     .stack {

@@ -19,6 +19,9 @@ const work = defineCollection({
       period: z.string(),
       role: z.string(),
       summary: z.string(),
+      // Two or three plain facts. The listing shows these instead of the stat
+      // rail, so keep them short enough to read at a glance.
+      bullets: z.array(z.string()).min(2).max(3),
       url: z.string().url().optional(),
       order: z.number(),
       featured: z.boolean().default(false),

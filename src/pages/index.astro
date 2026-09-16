@@ -10,9 +10,9 @@ const featured = (await getCollection('work'))
 
 const headline = [
   { value: '€67', label: 'Average cost per enquiry across €13,700 of managed ad spend' },
-  { value: '€533', label: 'Cost per enquiry on the campaign I stopped', tone: 'flag' as const },
+  { value: '€533', label: 'Cost per enquiry on the campaign that was stopped', tone: 'flag' as const },
   { value: '70+', label: 'Multilingual hotel sites under one technical SEO strategy' },
-  { value: '3,161', label: 'Construction projects in a pipeline I built and run alone' },
+  { value: '3,161', label: 'Construction projects in a pipeline built and run solo' },
 ];
 
 const skills = [
@@ -49,19 +49,17 @@ const skills = [
 >
   <section class="hero wrap">
     <p class="eyebrow">Web &amp; marketing developer · technical SEO, analytics, front end</p>
-    <h1>The number I'm proudest of is the one where I stopped.</h1>
+    <h1>I build websites and measure whether they worked.</h1>
     <div class="split hero-body">
       <div>
         <p class="lede">
-          I build websites and then measure whether they worked. Eight years of it, currently
-          owning the web and marketing stack for a 70+ site multilingual hotel portfolio at
-          Sojern, and running a construction-intelligence product I built end to end on the side.
+          Eight years across front-end build, technical SEO, tag management and analytics.
+          Currently own the web and marketing stack for a 70+ site multilingual hotel portfolio
+          at Sojern, and run a construction-intelligence product built end to end on the side.
         </p>
         <p>
-          The measuring is the part most portfolios leave out, because measuring honestly means
-          publishing the campaign that cost €533 a lead before I killed it, and the data source
-          that is still blocked by Cloudflare. Every project below carries its numbers, and the
-          ones that went wrong get the same size patch as the ones that worked.
+          Each project below lists what it was and what it produced, including the numbers that
+          went the wrong way.
         </p>
         <p class="actions">
           <a href="/work/">See the work</a>
@@ -90,11 +88,16 @@ const skills = [
               {entry.data.client} · {entry.data.period}
             </p>
             <p>{entry.data.summary}</p>
+            <ul class="bullets">
+              {entry.data.bullets.map((point) => (
+                <li>{point}</li>
+              ))}
+            </ul>
           </li>
         ))
       }
     </ol>
-    <p><a href="/work/">All work, including the pilot that has not proven itself yet</a></p>
+    <p><a href="/work/">All five projects</a></p>
   </section>
 
   <section class="section wrap">
@@ -196,6 +199,19 @@ const skills = [
       font-size: 0.78rem;
       color: var(--ink-soft);
       margin-bottom: 0.8rem;
+    }
+
+    /* Cards sit in a 3-up grid, so bullets run narrow. Drop a step to keep
+       them from swamping the summary above them. */
+    .bullets {
+      margin: 0.9rem 0 0;
+      padding-left: 1.05rem;
+      font-size: 0.92em;
+      color: var(--ink-soft);
+    }
+
+    .bullets li {
+      margin-bottom: 0.4rem;
     }
 
     .skills {
